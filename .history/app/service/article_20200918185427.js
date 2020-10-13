@@ -43,38 +43,6 @@ class Article extends Service {
     return { total: count, articles: rows };
   }
 
-  async userArticles({ page, size, uid, orderType }) {
-    const where = { status: 1, uid };
-    const { count, rows } = await this.ctx.model.Article.findAndCountAll({
-      where,
-      offset: (parseInt(page) - 1) * parseInt(size),
-      limit: parseInt(size),
-      order: [[ orderType, 'DESC' ]],
-      attributes: [
-        'view',
-        'title',
-        'favorite',
-        'id',
-        'comment',
-        'cover',
-        'createdAt',
-      ],
-      include: [
-        {
-          model: this.ctx.model.Tag,
-          as: 'tag',
-          attributes: [ 'id', 'name', 'en_name' ],
-        },
-        {
-          model: this.ctx.model.User,
-          as: 'user',
-          attributes: [ 'id', 'username', 'avatar' ],
-        },
-      ],
-    });
-    return { total: count, articles: rows };
-  }
-
   async detail({ id }) {
     return this.ctx.model.Article.findOne({
       where: { id },

@@ -2,7 +2,7 @@
  * @Author: sizhou
  * @Date: 2020-09-09 15:48:11
  * @LastEditors: sizhou
- * @LastEditTime: 2020-10-13 11:34:16
+ * @LastEditTime: 2020-09-18 15:33:37
  */
 'use strict';
 
@@ -17,7 +17,6 @@ module.exports = app => {
   router.post('/user/login', controller.user.login);
   router.get('/user/info', controller.user.info);
   router.post('/user/updateUserInfo', controller.user.updateInfo);
-  router.get('/user/articles', controller.article.userArticles);
   // home
   router.get('/categories', controller.home.categories);
   router.get('/tags', controller.home.tags);

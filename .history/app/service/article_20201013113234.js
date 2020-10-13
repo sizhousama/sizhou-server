@@ -65,11 +65,6 @@ class Article extends Service {
           as: 'tag',
           attributes: [ 'id', 'name', 'en_name' ],
         },
-        {
-          model: this.ctx.model.User,
-          as: 'user',
-          attributes: [ 'id', 'username', 'avatar' ],
-        },
       ],
     });
     return { total: count, articles: rows };
