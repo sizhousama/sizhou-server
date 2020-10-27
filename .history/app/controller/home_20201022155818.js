@@ -2,7 +2,7 @@
  * @Author: sizhou
  * @Date: 2020-09-18 14:59:17
  * @LastEditors: sizhou
- * @LastEditTime: 2020-10-22 19:16:57
+ * @LastEditTime: 2020-09-21 17:27:33
  */
 'use strict';
 
@@ -17,8 +17,8 @@ class HomeController extends Controller {
   async tags() {
     const { ctx } = this;
     ctx.validate({
-      name: { type: 'string', allowEmpty: true, required: false },
-      catId: { type: 'id', allowEmpty: true, required: false },
+      title: { type: 'string', allowEmpty: true, required: false },
+      catId: { type: 'int', allowEmpty: true, required: false },
     }, ctx.query);
     ctx.body = Success(1, 'Success', await ctx.service.tag.tags(ctx.query));
   }

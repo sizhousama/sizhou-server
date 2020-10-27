@@ -56,7 +56,7 @@ class WriteController extends Controller {
     ctx.validate({
       markdown: { type: 'string' },
       title: { type: 'string' },
-      html: { type: 'string', required: false },
+      html: { type: 'string' },
       selectedTag: { type: 'int' },
       selectedCategory: { type: 'int' },
       coverImageUrl: { type: 'string', required: false },
@@ -82,10 +82,10 @@ class WriteController extends Controller {
   async updateArticle() {
     const { ctx } = this;
     ctx.validate({
-      id: { type: 'int' },
+      id: { type: 'id' },
       markdown: { type: 'string' },
       title: { type: 'string' },
-      html: { type: 'string', required: false },
+      html: { type: 'string' },
       selectedTag: { type: 'int' },
       selectedCategory: { type: 'int' },
       coverImageUrl: { type: 'string', required: false },

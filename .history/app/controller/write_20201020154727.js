@@ -24,8 +24,8 @@ class WriteController extends Controller {
   async createDraft() {
     const { ctx } = this;
     ctx.validate({
-      title: { type: 'string', required: false },
-      markdown: { type: 'string', required: false },
+      title: { type: 'string' },
+      markdown: { type: 'string' },
     });
     const { uid } = ctx.locals;
     const draft = await ctx.service.draft.createDraft(ctx.request.body, uid);
@@ -35,9 +35,9 @@ class WriteController extends Controller {
   async updateDraft() {
     const { ctx } = this;
     ctx.validate({
-      id: { type: 'int' },
-      title: { type: 'string', required: false },
-      markdown: { type: 'string', required: false },
+      id: { type: 'id' },
+      title: { type: 'string' },
+      markdown: { type: 'string' },
     });
     await ctx.service.draft.updateDraft(ctx.request.body);
     ctx.body = Success(1, 'Success');
@@ -56,7 +56,7 @@ class WriteController extends Controller {
     ctx.validate({
       markdown: { type: 'string' },
       title: { type: 'string' },
-      html: { type: 'string', required: false },
+      html: { type: 'string' },
       selectedTag: { type: 'int' },
       selectedCategory: { type: 'int' },
       coverImageUrl: { type: 'string', required: false },
@@ -82,10 +82,10 @@ class WriteController extends Controller {
   async updateArticle() {
     const { ctx } = this;
     ctx.validate({
-      id: { type: 'int' },
+      id: { type: 'id' },
       markdown: { type: 'string' },
       title: { type: 'string' },
-      html: { type: 'string', required: false },
+      html: { type: 'string' },
       selectedTag: { type: 'int' },
       selectedCategory: { type: 'int' },
       coverImageUrl: { type: 'string', required: false },

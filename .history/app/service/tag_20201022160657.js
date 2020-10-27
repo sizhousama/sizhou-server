@@ -2,7 +2,7 @@
  * @Author: sizhou
  * @Date: 2020-09-28 18:30:50
  * @LastEditors: sizhou
- * @LastEditTime: 2020-10-22 16:07:28
+ * @LastEditTime: 2020-10-22 16:06:54
  */
 'use strict';
 const Service = require('egg').Service;
@@ -12,11 +12,14 @@ class Tag extends Service {
   async tags({ name, catId }) {
     const where = {
       status: 1,
+      name: {
+        [Op.like]: '%' + name + '%',
+      },
     };
-    if (name) {
+    if(name){
       where.name = {
         [Op.like]: '%' + name + '%',
-      };
+      },
     }
     if (catId) {
       where.category_id = catId;

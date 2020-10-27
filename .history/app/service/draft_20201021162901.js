@@ -1,9 +1,3 @@
-/*
- * @Author: sizhou
- * @Date: 2020-09-28 18:30:50
- * @LastEditors: sizhou
- * @LastEditTime: 2020-10-21 16:29:02
- */
 'use strict';
 const Service = require('egg').Service;
 

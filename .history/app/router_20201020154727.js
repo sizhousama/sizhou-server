@@ -2,7 +2,7 @@
  * @Author: sizhou
  * @Date: 2020-09-09 15:48:11
  * @LastEditors: sizhou
- * @LastEditTime: 2020-10-21 10:24:44
+ * @LastEditTime: 2020-10-13 11:34:16
  */
 'use strict';
 
@@ -21,9 +21,9 @@ module.exports = app => {
   // 文章
   router.get('/user/draft', controller.write.draft);
   router.get('/user/drafts', controller.write.drafts);
-  router.post('/user/addDraft', controller.write.createDraft);
-  router.post('/user/updateDraft', controller.write.updateDraft);
-  router.post('/user/delDraft', controller.write.deleteDraft);
+  router.post('/user/addDrafts', controller.write.createDraft);
+  router.post('/user/updateDrafts', controller.write.updateDraft);
+  router.post('/user/delDrafts', controller.write.deleteDraft);
   router.get('/user/articleDetail', controller.write.articleDetail);
   router.post('/user/addArticle', controller.write.createPublish);
   router.post('/user/updateArticle', controller.write.updateArticle);
