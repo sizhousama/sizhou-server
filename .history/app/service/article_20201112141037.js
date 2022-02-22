@@ -4,8 +4,9 @@ const Service = require('egg').Service;
 const { literal } = require('sequelize');
 
 class Article extends Service {
-  async articles({ page, size, category, tag, orderType }) {
-    const where = { status: 1 };
+  async articles({ page, size, category, tag, orderType, status }) {
+    const where = { };
+    if (status) where.status = status;
     if (category) where.category_id = category;
     if (tag) where.tag_id = tag;
     const { count, rows } = await this.ctx.model.Article.findAndCountAll({
@@ -40,7 +41,7 @@ class Article extends Service {
         },
       ],
     });
-    return { total: count, articles: rows };
+    return { total: count, articles: rows, page, size };
   }
 
   async userArticles({ page, size, uid, orderType }) {
@@ -58,6 +59,7 @@ class Article extends Service {
         'comment',
         'cover',
         'createdAt',
+        'draft_id',
       ],
       include: [
         {
@@ -65,9 +67,53 @@ class Article extends Service {
           as: 'tag',
           attributes: [ 'id', 'name', 'en_name' ],
         },
+        {
+          model: this.ctx.model.User,
+          as: 'user',
+          attributes: [ 'id', 'username', 'avatar' ],
+        },
       ],
     });
     return { total: count, articles: rows };
+  }
+
+  async createPublish(params, uid) {
+    const {
+      markdown,
+      title,
+      html,
+      selectedTag,
+      selectedCategory,
+      coverImageUrl,
+      draftId,
+    } = params;
+    return this.ctx.model.Article.create({
+      markdown,
+      title,
+      html,
+      tag_id: selectedTag,
+      category_id: selectedCategory,
+      cover: coverImageUrl,
+      uid,
+      draft_id: draftId,
+    });
+  }
+
+  async updatePublish(params) {
+    const { id, markdown, title, html, selectedTag, selectedCategory, coverImageUrl } = params;
+    return this.ctx.model.Article.update(
+      {
+        markdown,
+        title,
+        html,
+        tag_id: selectedTag,
+        category_id: selectedCategory,
+        cover: coverImageUrl,
+      },
+      {
+        where: { id },
+      }
+    );
   }
 
   async detail({ id }) {
@@ -160,41 +206,7 @@ class Article extends Service {
     );
   }
 
-  async createPublish(params, uid) {
-    const {
-      markdown,
-      title,
-      html,
-      selectedTag,
-      selectedCategory,
-      coverImageUrl,
-    } = params;
-    return this.ctx.model.Article.create({
-      markdown,
-      title,
-      html,
-      tag_id: selectedTag,
-      category_id: selectedCategory,
-      cover: coverImageUrl,
-      uid,
-    });
-  }
 
-  async updatePublish(params) {
-    const { id, markdown, title, html, selectedTag, selectedCategory } = params;
-    return this.ctx.model.Article.update(
-      {
-        markdown,
-        title,
-        html,
-        tag_id: selectedTag,
-        category_id: selectedCategory,
-      },
-      {
-        where: { id },
-      }
-    );
-  }
 }
 
 module.exports = Article;
