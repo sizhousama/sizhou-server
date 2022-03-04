@@ -6,7 +6,7 @@
  */
 'use strict';
 module.exports = {
-  DATABASE: 'blogdb', // 数据库名
+  DATABASE: 'sizhou', // 数据库名
   HOST: 'localhost', // HOST
   PORT: '3306', // 端口
   USERNAME: 'root', // 用户名

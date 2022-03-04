@@ -18,8 +18,8 @@ const aliInfo = {
   bucket: 'sizhou',
   accessKeyId: 'LTAI4G1VGYhqMygY1G6Yz6JY',
   accessKeySecret: '7JS1AuxvX3GpQrYNRfS5DnBSLsw5t4',
-  endpoint: 'oss.jcxcc.cn',
-  cname: true,
+  // endpoint: 'oss.jcxcc.cn',
+  // cname: true,
 };
 
 const client = new OSS(aliInfo);

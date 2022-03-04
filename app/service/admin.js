@@ -30,6 +30,8 @@ class Admin extends Service {
         'avatar',
         'createdAt',
         'status',
+        'email',
+        'password',
       ],
     });
     return { total: count, list: rows, page: parseInt(page), size: parseInt(size) };
