@@ -14,7 +14,7 @@ module.exports = () => {
     try {
       const token = ctx.headers.token;
       if (!token) {
-        ctx.throw(401, 'token does not exist');
+        ctx.throw(401, '未登录或token已过期！');
       }
       const { uid, exp, email } = jwt.verify(token, SECRET) || {};
       ctx.locals.uid = uid;
@@ -22,7 +22,7 @@ module.exports = () => {
       ctx.locals.email = email;
       await next();
     } catch (e) {
-      ctx.body = { code: 401, msg: e.message || 'invalid or expired token' };
+      ctx.body = { code: 401, msg: e.message || '无效token或token已过期！' };
     }
   };
 };

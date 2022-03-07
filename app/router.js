@@ -37,9 +37,19 @@ module.exports = app => {
   router.get('/tags', controller.home.tags);
   router.get('/articles', controller.home.articles);
 
-  // admin
-  router.get('/admin/user', controller.admin.userlist);
-  router.get('/admin/drafts', controller.admin.draftlist);
-  router.get('/admin/cates', controller.admin.categoryList);
-  router.get('/admin/tags', controller.admin.tagList);
+  // admin-user
+  router.get('/adminUser/list', controller.adminUser.list);
+  router.post('/adminUser/add', controller.adminUser.add);
+  router.post('/adminUser/delete', controller.adminUser.delete);
+  router.post('/adminUser/update', controller.adminUser.update);
+  router.get('/adminUser/get', controller.adminUser.get);
+
+  // admin-draft
+  router.get('/adminDraft/list', controller.adminDraft.list);
+
+  // admin-cate
+  router.get('/adminCate/list', controller.adminCate.list);
+
+  // admin-tag
+  router.get('/adminTag/list', controller.adminTag.list);
 };
