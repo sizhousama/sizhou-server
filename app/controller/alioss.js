@@ -16,8 +16,8 @@ const { Success } = require('../lib/response_status');
 const aliInfo = {
   region: 'oss-cn-shenzhen',
   bucket: 'sizhou',
-  accessKeyId: 'LTAI4G1VGYhqMygY1G6Yz6JY',
-  accessKeySecret: '7JS1AuxvX3GpQrYNRfS5DnBSLsw5t4',
+  accessKeyId: '',
+  accessKeySecret: '',
   // endpoint: 'oss.jcxcc.cn',
   // cname: true,
 };
