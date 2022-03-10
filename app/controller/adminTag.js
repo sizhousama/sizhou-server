@@ -19,6 +19,49 @@ class AdminTagController extends Controller {
     }, ctx.query);
     ctx.body = Success(1, 'Success', await ctx.service.adminTag.tagList(ctx.query));
   }
+
+  async add() {
+    const { ctx } = this;
+    const body = ctx.request.body;
+    ctx.validate({
+      category_id: 'int',
+      name: 'string',
+      en_name: 'string',
+    });
+    let status = 400;
+    await ctx.service.adminTag.tagAdd(body);
+    status = 1;
+    ctx.body = Success(status, 'Success');
+  }
+
+  async delete() {
+    const { ctx } = this;
+    const { id } = ctx.params;
+    await ctx.service.adminTag.tagDelete(id);
+    ctx.body = Success(1, 'Success', { id });
+  }
+
+  async update() {
+    const { ctx } = this;
+    ctx.validate({
+      id: { type: 'int', required: true },
+      category_id: { type: 'int' },
+      name: { type: 'string' },
+      en_name: { type: 'string' },
+    });
+    await ctx.service.adminTag.tagUpdate(ctx.request.body);
+    ctx.body = Success(1, 'Success');
+  }
+
+  async get() {
+    const { ctx } = this;
+    const { id } = ctx.params;
+    if (!id) {
+      ctx.body = Success(1, 'id is required');
+    }
+    const tag = await ctx.service.adminTag.tagGet(id);
+    ctx.body = Success(1, 'Success', tag);
+  }
 }
 
 module.exports = AdminTagController;

@@ -23,6 +23,37 @@ class AdminCate extends Service {
       ],
     });
   }
+
+  async categoryAdd(data) {
+    return this.ctx.model.Category.create(data);
+  }
+
+  async categoryDelete(id) {
+    return this.ctx.model.Category.update({
+      status: 2,
+    }, {
+      where: { id },
+    });
+  }
+
+  async categoryUpdate(data) {
+    const { id, name, en_name } = data;
+    return this.ctx.model.Category.update(
+      { name, en_name },
+      { where: { id } }
+    );
+  }
+
+  async categoryGet(id) {
+    return this.ctx.model.Category.findOne({
+      where: { id, status: 1 },
+      attributes: [
+        'id',
+        'name',
+        'en_name',
+      ],
+    });
+  }
 }
 
 module.exports = AdminCate;

@@ -44,8 +44,9 @@ class AdminUserController extends Controller {
 
   async delete() {
     const { ctx } = this;
-    ctx.validate({ id: 'int' });
-    const { id } = ctx.request.body;
+    const { id } = ctx.params;
+    // ctx.validate({ id: 'int', required: true });
+    // const { id } = ctx.request.body;
     await ctx.service.adminUser.userDelete(id);
     ctx.body = Success(1, 'Success', { id });
   }
@@ -54,9 +55,9 @@ class AdminUserController extends Controller {
     const { ctx } = this;
     ctx.validate({
       id: { type: 'int', required: true },
-      email: { type: 'string', allowEmpty: true, required: false },
-      avatar: { type: 'string', allowEmpty: true, required: false },
-      username: { type: 'string', allowEmpty: true, required: false },
+      email: { type: 'string' },
+      avatar: { type: 'string' },
+      username: { type: 'string' },
     });
     await ctx.service.adminUser.userUpdate(ctx.request.body);
     ctx.body = Success(1, 'Success');
@@ -64,9 +65,11 @@ class AdminUserController extends Controller {
 
   async get() {
     const { ctx } = this;
-    const { uid, exp } = ctx.locals;
-    const user = await ctx.service.adminUser.userGet(uid);
-    user.dataValues.exp = exp;
+    const { id } = ctx.params;
+    if (!id) {
+      ctx.body = Success(1, 'id is required');
+    }
+    const user = await ctx.service.adminUser.userGet(id);
     ctx.body = Success(1, 'Success', user);
   }
 }

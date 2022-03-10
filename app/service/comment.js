@@ -73,10 +73,7 @@ class Comment extends Service {
 
 
   async deleteComment(id) {
-    return this.ctx.model.Comment.update(
-      {
-        status: 2,
-      },
+    return this.ctx.model.Comment.destroy(
       {
         where: { id },
       }

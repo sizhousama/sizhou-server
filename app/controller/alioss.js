@@ -29,7 +29,7 @@ class AliOssController extends Controller {
     const { ctx } = this;
     const file = ctx.request.files[0];
     let result;
-    const name = 'blog/' + genId(10) + file.filename;
+    const name = 'blog/' + genId(10) + file.filename.split('.')[1];
     try {
       result = await client.put(name, file.filepath);
     } finally {

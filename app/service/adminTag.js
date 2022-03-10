@@ -31,6 +31,44 @@ class AdminTag extends Service {
       }],
     });
   }
+
+  async tagAdd(data) {
+    return this.ctx.model.Tag.create(data);
+  }
+
+  async tagDelete(id) {
+    return this.ctx.model.Tag.update({
+      status: 2,
+    }, {
+      where: { id },
+    });
+  }
+
+  async tagUpdate(data) {
+    const { id, category_id, name, en_name } = data;
+    return this.ctx.model.Tag.update(
+      {
+        category_id,
+        name,
+        en_name,
+      },
+      {
+        where: { id },
+      }
+    );
+  }
+
+  async tagGet(id) {
+    return this.ctx.model.Tag.findOne({
+      where: { id, status: 1 },
+      attributes: [
+        'id',
+        'category_id',
+        'name',
+        'en_name',
+      ],
+    });
+  }
 }
 
 module.exports = AdminTag;

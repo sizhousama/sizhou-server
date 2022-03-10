@@ -25,6 +25,7 @@ class AdminUser extends Service {
         'status',
         'email',
         'password',
+        'account_type',
       ],
     });
     return { total: count, list: rows, page: parseInt(page), size: parseInt(size) };
@@ -49,12 +50,13 @@ class AdminUser extends Service {
   }
 
   async userUpdate(params) {
-    const { id, avatar, username, email } = params;
+    const { id, avatar, username, email, account_type } = params;
     return this.ctx.model.User.update(
       {
         avatar,
         username,
         email,
+        account_type,
       },
       {
         where: { id },
