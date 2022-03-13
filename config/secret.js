@@ -7,10 +7,10 @@
 'use strict';
 module.exports = {
   DATABASE: 'sizhou', // 数据库名
-  HOST: 'localhost', // HOST
+  HOST: '8.129.90.165', // HOST
   PORT: '3306', // 端口
   USERNAME: 'root', // 用户名
-  PASSWORD: 'jst1997', // 密码 Jst1997!
+  PASSWORD: 'Jst1997!', // 密码 Jst1997!
   SECRET: 'secret', // 加密Key
   EXPIRES: 60 * 30 * 12, // cookie过期时间
 };

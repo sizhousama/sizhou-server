@@ -16,10 +16,10 @@ const { Success } = require('../lib/response_status');
 const aliInfo = {
   region: 'oss-cn-shenzhen',
   bucket: 'sizhou',
-  accessKeyId: '',
-  accessKeySecret: '',
-  // endpoint: 'oss.jcxcc.cn',
-  // cname: true,
+  accessKeyId: 'LTAI4G1VGYhqMygY1G6Yz6JY',
+  accessKeySecret: '7JS1AuxvX3GpQrYNRfS5DnBSLsw5t4',
+  endpoint: 'oss.sizhouweb.cn',
+  cname: true,
 };
 
 const client = new OSS(aliInfo);
@@ -29,7 +29,7 @@ class AliOssController extends Controller {
     const { ctx } = this;
     const file = ctx.request.files[0];
     let result;
-    const name = 'blog/' + genId(10) + file.filename.split('.')[1];
+    const name = 'blog/' + genId(10) + '.' + file.filename.split('.')[1];
     try {
       result = await client.put(name, file.filepath);
     } finally {
