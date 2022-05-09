@@ -18,6 +18,7 @@ module.exports = app => {
   router.post('/user/login', controller.user.login);
   router.get('/user/info', controller.user.info);
   router.post('/user/updateUserInfo', controller.user.updateInfo);
+  router.post('/user/repassword', controller.user.repassword);
   router.get('/user/articles', controller.article.userArticles);
 
   // 文章

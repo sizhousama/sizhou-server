@@ -17,10 +17,18 @@ class User extends Service {
       password: generatePassWord(password),
     });
   }
+
   async findUser(data) {
     const { email } = data;
     return this.ctx.model.User.findOne({
       where: { email, status: 1 },
+    });
+  }
+
+  async getUserPassword(id) {
+    return this.ctx.model.User.findOne({
+      where: { id, status: 1 },
+      attributes: [ 'password' ],
     });
   }
 

@@ -81,6 +81,24 @@ class User extends Controller {
     user.dataValues.exp = exp;
     ctx.body = Success(1, 'Success', user);
   }
+
+  async repassword() {
+    const { ctx } = this;
+    ctx.validate({
+      oldpassword: 'string',
+      newpassword: 'string',
+    });
+
+    const { oldpassword, newpassword } = ctx.request.body;
+    const { uid } = ctx.locals;
+    const user = await ctx.service.user.getUserPassword(uid);
+    if (generatePassWord(oldpassword) !== user.password) {
+      ctx.body = Fail(0, '原密码不正确！');
+    } else {
+      await ctx.service.user.updateUser({ password: generatePassWord(newpassword) }, uid);
+      ctx.body = Success(1, 'Success', true);
+    }
+  }
 }
 
 module.exports = User;
